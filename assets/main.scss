@@ -1,0 +1,9 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@import "styles";
+
+.navbar-brand img {
+    max-height: 35px;
+}

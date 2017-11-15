@@ -1,0 +1,31 @@
+---
+layout: post
+title:  "Refractoring Your ReactJS Input Events"
+subtitle: "A Brief Look at Handle Change Optimiziation"
+date:   2017-11-03 10:45:13 -0400
+background: '/img/posts/06.jpg'
+---
+
+<p>When I first started programming in React, handling dynamic user input and state change was a nightmare. I didn't know it was a nightmare but I found out very fast with every continuing month that I would look back at old code and reprimand myself for poor programming decisions. In fact, I still do it myself and when I see the bad code, I make an effort in the time allotted to upgrade that code on the side one step at a time. Of course, if I have the time, I'll rebuild the whole freakin' stack of components to better serve updated user expectations and experiences.</p>
+
+<p>One of my poorer choices in handling input was the myriad of functions to handle an array of use cases that in reality can be solved with one or two functions. That isn't to say that sometimes due to time constraints or one-off use cases that you can't put it another much needed input handler, but when you can, think of how your current functions can be refactored cleanly to accommodate multiple use cases.</p>
+
+<p>My first set of handle changes went something like this:</p>
+
+<script src="https://gist.github.com/mmcshinsky/1dea1305ec44855b0dc2faef3771c51b.js"></script>
+
+<p>While version 1 is your standard handleChange function, I feel that it lacks a slight bit of added functionality to make it more useful across the array of inputs that you may find yourself working with especially when dealing with larger forms.</p>
+
+<p>Version 2 is an adaptation to version 1 to handle nested objects within the state. It is assumed here that the objects properties are known and valid. When this is not the case, it can be useful to add in the Object prototype "hasOwnProperty" to validate the existence and allow the change of state objects.</p>
+
+<p>Versions 3 & 4 are additional single use functions for targeting checkbox inputs and select boxes in a very traditional vanilla JavaScript approach.</p>
+
+<p>After looking at all these approaches and using them continuously in projects, I grew tired of using so many functions for so many little changes in all my components. As a result, I have refactored these functions down to two functions that handle 99% of my general needs. Note that lately, I have been dealing with an enormous amount of form views in recent projects. Consolidating down to these two functions has saved me space and clean coding thus keeping my from jumping all over the place to find out why various functions were behaving differently while all trying in the end to do the very same thing.</p>
+
+<script src="https://gist.github.com/mmcshinsky/6291256b0f7edac1ad247c8805296c0c.js"></script>
+
+<p>Now I'm not naive to say that these are the best of the best or will handle all your future needs, but I have found them to be very useful in keeping clean code and prepping for future scale. I will also note that I prefer to use the checked property for checkbox input over the value property as commonly seen in most other input types in combination with React.</p>
+
+<p>If you have any questions or suggestions to improve the code above, please feel free to reach out and share your thoughts!</p>
+
+<p>For more information about React inputs and forms visit <a href="https://reactjs.org/docs/forms.html" target="_blank">https://reactjs.org/docs/forms.html</a></p>
