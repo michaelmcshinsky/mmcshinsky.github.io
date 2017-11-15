@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Refractoring Your ReactJS Input Events - Michael McShinsky
+    
+  </title>
+  <link href="/img/main/favicon.ico" type="image/x-icon" rel="icon">
+  <meta name="description" content="When I first started programming in React, handling dynamic user input and state change was a nightmare. I didn&#39;t know it was a nightmare but I found out ver...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/vendor/fancybox/css/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://mcshinsky.net/2017/11/03/refractoring-your-reactjs-input-events.html">
+  <link rel="alternate" type="application/rss+xml" title="Michael McShinsky" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <div class="logo">
+      <a class="navbar-brand" href="/"><img src="/img/main/logo-light.png"/></a>
+    </div>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/posts">Posts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/projects">Projects</a>
+        </li>
+        <!--<li class="nav-item">
+          <a class="nav-link" href="/contact">Contact</a>
+        </li>-->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<header class="masthead" style="background-image: url('/img/posts/06.jpg')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Refractoring Your ReactJS Input Events</h1>
+          
+          <h2 class="subheading">A Brief Look at Handle Change Optimiziation</h2>
+          
+          <span class="meta">Posted by
+            <a href="#">Michael McShinsky</a>
+            on November 03, 2017</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      <p>When I first started programming in React, handling dynamic user input and state change was a nightmare. I didn't know it was a nightmare but I found out very fast with every continuing month that I would look back at old code and reprimand myself for poor programming decisions. In fact, I still do it myself and when I see the bad code, I make an effort in the time allotted to upgrade that code on the side one step at a time. Of course, if I have the time, I'll rebuild the whole freakin' stack of components to better serve updated user expectations and experiences.</p>
+
+<p>One of my poorer choices in handling input was the myriad of functions to handle an array of use cases that in reality can be solved with one or two functions. That isn't to say that sometimes due to time constraints or one-off use cases that you can't put it another much needed input handler, but when you can, think of how your current functions can be refactored cleanly to accommodate multiple use cases.</p>
+
+<p>My first set of handle changes went something like this:</p>
+
+<script src="https://gist.github.com/mmcshinsky/1dea1305ec44855b0dc2faef3771c51b.js"></script>
+
+<p>While version 1 is your standard handleChange function, I feel that it lacks a slight bit of added functionality to make it more useful across the array of inputs that you may find yourself working with especially when dealing with larger forms.</p>
+
+<p>Version 2 is an adaptation to version 1 to handle nested objects within the state. It is assumed here that the objects properties are known and valid. When this is not the case, it can be useful to add in the Object prototype "hasOwnProperty" to validate the existence and allow the change of state objects.</p>
+
+<p>Versions 3 & 4 are additional single use functions for targeting checkbox inputs and select boxes in a very traditional vanilla JavaScript approach.</p>
+
+<p>After looking at all these approaches and using them continuously in projects, I grew tired of using so many functions for so many little changes in all my components. As a result, I have refactored these functions down to two functions that handle 99% of my general needs. Note that lately, I have been dealing with an enormous amount of form views in recent projects. Consolidating down to these two functions has saved me space and clean coding thus keeping my from jumping all over the place to find out why various functions were behaving differently while all trying in the end to do the very same thing.</p>
+
+<script src="https://gist.github.com/mmcshinsky/6291256b0f7edac1ad247c8805296c0c.js"></script>
+
+<p>Now I'm not naive to say that these are the best of the best or will handle all your future needs, but I have found them to be very useful in keeping clean code and prepping for future scale. I will also note that I prefer to use the checked property for checkbox input over the value property as commonly seen in most other input types in combination with React.</p>
+
+<p>If you have any questions or suggestions to improve the code above, please feel free to reach out and share your thoughts!</p>
+
+<p>For more information about React inputs and forms visit <a href="https://reactjs.org/docs/forms.html" target="_blank">https://reactjs.org/docs/forms.html</a></p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        <a class="btn btn-primary float-left" href="/2017/01/11/victoria-auger.html" data-toggle="tooltip" data-placement="top" title="Victoria Auger">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          
+          <li class="list-inline-item">
+            <a href="https://www.twitter.com/mikemcshinsky" target="_blank">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/michaelmcshinsky" target="_blank">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/mmcshinsky" target="_blank">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Michael McShinsky 2017</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/fancybox/js/jquery.fancybox.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>
