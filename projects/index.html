@@ -8,7 +8,7 @@ background: '/img/bg-project.jpg'
   {% if post.type == 'project' %}
     <article class="post-preview col-sm-6 col-md-4" style="margin-bottom: 15px;">
       <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
-        <img src={{post.background}}/>
+        <img src="{{post.background}}"/>
         <h2 class="post-title">{{ post.title }}</h2>
         {% if post.subtitle %}
         <h3 class="post-subtitle">{{ post.subtitle }}</h3>
