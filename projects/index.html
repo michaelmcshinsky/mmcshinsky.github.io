@@ -4,19 +4,20 @@ title: Projects
 background: '/img/bg-project.jpg'
 ---
 <div class="row">
-{% for post in paginator.posts %}
-  <article class="post-preview col-sm-6 col-md-4" style="margin-bottom: 15px;">
-    <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
-      <img src={{post.background}}/>
-      <h2 class="post-title">{{ post.title }}</h2>
-      {% if post.subtitle %}
-      <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-      {% else %}
-      <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
-      {% endif %}
-    </a>
-  </article>
-
+{% for post in site.posts %}
+  {% if post.type == 'project' %}
+    <article class="post-preview col-sm-6 col-md-4" style="margin-bottom: 15px;">
+      <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
+        <img src={{post.background}}/>
+        <h2 class="post-title">{{ post.title }}</h2>
+        {% if post.subtitle %}
+        <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+        {% else %}
+        <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+        {% endif %}
+      </a>
+    </article>
+  {% endif %}
 {% endfor %}
 </div>
 
